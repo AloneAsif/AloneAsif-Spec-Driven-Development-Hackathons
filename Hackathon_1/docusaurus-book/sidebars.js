@@ -22,6 +22,11 @@ const sidebars = {
       label: 'Module 1: ROS 2',
       items: ['module-1/intro-to-ros2','module-1/ros2-pub-sub','module-1/ros2-python-agents','module-1/urdf-basics'],
     },
+    {
+      type: 'category',
+      label: 'Module 2: Digital Twin',
+      items: ['module-2/building-digital-twin','module-2/gazebo-simulation','module-2/unity-rendering','module-2/troubleshooting','module-2/validation'],
+    },
   ],
 };
 
