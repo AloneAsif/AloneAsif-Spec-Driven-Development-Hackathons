@@ -27,6 +27,11 @@ const sidebars = {
       label: 'Module 2: Digital Twin',
       items: ['module-2/building-digital-twin','module-2/gazebo-simulation','module-2/unity-rendering','module-2/troubleshooting','module-2/validation'],
     },
+    {
+      type: 'category',
+      label: 'Module 3: The AI-Robot Brain (NVIDIA Isaac™)',
+      items: ['module-3/index', 'module-3/isaac-sim-overview', 'module-3/isaac-ros-perception', 'module-3/nav2-humanoid-navigation', 'module-3/system-integration', 'module-3/module-summary'],
+    },
   ],
 };
 
