@@ -715,7 +715,7 @@ validation_results = validate_segmentation_quality(
 
 After setting up segmentation sensors:
 1. Learn about [Synthetic Dataset Generation](./synthetic-data-generation.md)
-2. Explore [Isaac ROS Integration](../isaac-ros-perception.md)
+2. Explore [Isaac ROS Integration](./isaac-ros-perception.md)
 3. Configure [Performance Optimization](./performance-optimization.md)
 4. Test [Humanoid Model Loading](./humanoid-model-loading.md) with segmentation
 

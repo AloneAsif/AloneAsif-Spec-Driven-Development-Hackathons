@@ -293,7 +293,7 @@ omni.kit.tools.usd_stage_inspector
 After understanding USD fundamentals:
 1. Learn about [Humanoid Model Loading](./humanoid-model-loading.md)
 2. Configure [Physics and Lighting](./physics-lighting-config.md)
-3. Set up [Sensors for Data Generation](./sensor-setup.md)
+3. Set up [Sensors for Data Generation](./synthetic-data-generation.md)
 
 ## Additional Resources
 

@@ -980,7 +980,7 @@ def create_navigation_dataset():
 
 After setting up synthetic data generation:
 1. Configure [Performance Optimization](./performance-optimization.md)
-2. Learn about [Isaac ROS Integration](../isaac-ros-perception.md)
+2. Learn about [Isaac ROS Integration](./isaac-ros-perception.md)
 3. Test [Humanoid Model Loading](./humanoid-model-loading.md) with generated data
 4. Validate the complete [Synthetic Data Pipeline](./synthetic-data-validation.md)
 

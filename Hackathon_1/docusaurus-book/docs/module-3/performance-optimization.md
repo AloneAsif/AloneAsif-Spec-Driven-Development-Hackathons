@@ -798,8 +798,8 @@ hardware_specific_optimizations(gpu_model="RTX 4090", cpu_cores=16, memory_gb=64
 After implementing performance optimizations:
 1. Test the optimized setup with [Humanoid Model Loading](./humanoid-model-loading.md)
 2. Validate performance with [Synthetic Data Generation](./synthetic-data-generation.md)
-3. Ensure [Isaac ROS Integration](../isaac-ros-perception.md) maintains performance
-4. Profile the complete [Navigation Pipeline](../nav2-humanoid-navigation.md)
+3. Ensure [Isaac ROS Integration](./isaac-ros-perception.md) maintains performance
+4. Profile the complete [Navigation Pipeline](./nav2-humanoid-navigation.md)
 
 ## Additional Resources
 

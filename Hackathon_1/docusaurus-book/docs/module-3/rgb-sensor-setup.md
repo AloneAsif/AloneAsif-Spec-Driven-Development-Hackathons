@@ -463,7 +463,7 @@ After setting up RGB cameras:
 1. Configure [Depth Sensors](./depth-sensor-config.md)
 2. Set up [Semantic Segmentation Sensors](./segmentation-sensor-setup.md)
 3. Learn about [Synthetic Dataset Generation](./synthetic-data-generation.md)
-4. Explore [Isaac ROS Integration](../isaac-ros-perception.md)
+4. Explore [Isaac ROS Integration](./isaac-ros-perception.md)
 
 ## Additional Resources
 

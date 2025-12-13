@@ -609,7 +609,7 @@ validation_results = validate_depth_sensor("/World/HumanoidRobot/head/depth_sens
 After configuring depth sensors:
 - Set up [Semantic Segmentation Sensors](./segmentation-sensor-setup.md)
 - Learn about [Synthetic Dataset Generation](./synthetic-data-generation.md)
-- Explore [Isaac ROS Integration](../isaac-ros-perception.md)
+- Explore [Isaac ROS Integration](./isaac-ros-perception.md)
 - Configure [Performance Optimization](./performance-optimization.md)
 
 ## Additional Resources
