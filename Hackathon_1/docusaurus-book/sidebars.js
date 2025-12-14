@@ -32,6 +32,20 @@ const sidebars = {
       label: 'Module 3: The AI-Robot Brain (NVIDIA Isaac™)',
       items: ['module-3/index', 'module-3/isaac-sim-overview', 'module-3/isaac-ros-perception', 'module-3/nav2-humanoid-navigation', 'module-3/system-integration', 'module-3/module-summary'],
     },
+    {
+      type: 'category',
+      label: 'Module 4: Vision-Language-Action (VLA)',
+      items: [
+        'module-4/intro',
+        'module-4/vla-architecture',
+        'module-4/voice-to-text-whisper',
+        'module-4/llm-task-planning',
+        'module-4/perception-feedback-loop',
+        'module-4/ros2-action-execution',
+        'module-4/capstone-autonomous-humanoid',
+        'module-4/evaluation-criteria'
+      ],
+    },
   ],
 };
 
