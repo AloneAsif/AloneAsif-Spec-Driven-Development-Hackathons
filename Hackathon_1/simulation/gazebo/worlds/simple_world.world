@@ -1,0 +1,126 @@
+<?xml version="1.0" ?>
+<sdf version="1.7">
+  <world name="simple_world">
+    <!-- Include the default Gazebo world -->
+    <include>
+      <uri>model://ground_plane</uri>
+    </include>
+
+    <include>
+      <uri>model://sun</uri>
+    </include>
+
+    <!-- Physics engine configuration -->
+    <physics name="1ms" type="ode">
+      <max_step_size>0.001</max_step_size>
+      <real_time_factor>1.0</real_time_factor>
+      <real_time_update_rate>1000.0</real_time_update_rate>
+      <gravity>0 0 -9.8</gravity>
+    </physics>
+
+    <!-- Define a simple room environment -->
+    <model name="room_walls">
+      <static>true</static>
+
+      <!-- Wall 1: North wall -->
+      <link name="wall_north">
+        <pose>0 5 2.5 0 0 0</pose>
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>10 0.2 5</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.8 0.8 0.8 1</ambient>
+            <diffuse>0.8 0.8 0.8 1</diffuse>
+          </material>
+        </visual>
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>10 0.2 5</size>
+            </box>
+          </geometry>
+        </collision>
+      </link>
+
+      <!-- Wall 2: South wall -->
+      <link name="wall_south">
+        <pose>0 -5 2.5 0 0 0</pose>
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>10 0.2 5</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.8 0.8 0.8 1</ambient>
+            <diffuse>0.8 0.8 0.8 1</diffuse>
+          </material>
+        </visual>
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>10 0.2 5</size>
+            </box>
+          </geometry>
+        </collision>
+      </link>
+
+      <!-- Wall 3: East wall -->
+      <link name="wall_east">
+        <pose>5 0 2.5 0 0 0</pose>
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>0.2 10 5</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.8 0.8 0.8 1</ambient>
+            <diffuse>0.8 0.8 0.8 1</diffuse>
+          </material>
+        </visual>
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>0.2 10 5</size>
+            </box>
+          </geometry>
+        </collision>
+      </link>
+
+      <!-- Wall 4: West wall -->
+      <link name="wall_west">
+        <pose>-5 0 2.5 0 0 0</pose>
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>0.2 10 5</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.8 0.8 0.8 1</ambient>
+            <diffuse>0.8 0.8 0.8 1</diffuse>
+          </material>
+        </visual>
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>0.2 10 5</size>
+            </box>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+
+    <!-- Place our digital twin robot in the world -->
+    <include>
+      <name>digital_twin_robot</name>
+      <pose>0 0 0.1 0 0 0</pose>
+      <uri>model://my_robot</uri>
+    </include>
+
+  </world>
+</sdf>

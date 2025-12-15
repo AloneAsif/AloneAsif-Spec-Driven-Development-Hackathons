@@ -1,0 +1,17 @@
+# ROS-TCP Endpoint Configuration
+# This service connects Unity with ROS 2
+
+[Unit]
+Description=ROS TCP Endpoint
+After=network.target
+
+[Service]
+Type=simple
+User=ros
+ExecStart=/usr/bin/python3 -m ros_tcp_endpoint
+WorkingDirectory=/home/ros/digital_twin_ws
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

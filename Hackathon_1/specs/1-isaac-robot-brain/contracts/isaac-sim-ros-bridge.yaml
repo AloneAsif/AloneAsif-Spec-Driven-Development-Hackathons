@@ -1,0 +1,76 @@
+openapi: 3.0.0
+info:
+  title: Isaac Sim ROS 2 Bridge API
+  description: API specification for Isaac Sim ROS 2 bridge functionality
+  version: 1.0.0
+paths:
+  /simulation/control:
+    post:
+      summary: Control simulation execution
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                command:
+                  type: string
+                  enum: [start, stop, pause, reset]
+                parameters:
+                  type: object
+      responses:
+        '200':
+          description: Simulation command executed successfully
+        '400':
+          description: Invalid command or parameters
+  /sensors/data:
+    get:
+      summary: Retrieve sensor data from simulation
+      parameters:
+        - name: sensor_type
+          in: query
+          required: true
+          schema:
+            type: string
+            enum: [rgb, depth, segmentation, imu, lidar]
+        - name: frequency
+          in: query
+          schema:
+            type: number
+            default: 30
+      responses:
+        '200':
+          description: Sensor data stream
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+  /datasets/generate:
+    post:
+      summary: Generate synthetic dataset
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                scene:
+                  type: string
+                  description: USD scene file path
+                duration:
+                  type: number
+                  description: Duration in seconds
+                output_format:
+                  type: string
+                  enum: [rgb_depth_seg, calibration_data]
+                output_path:
+                  type: string
+                  description: Path to save generated dataset
+      responses:
+        '200':
+          description: Dataset generation started
+        '400':
+          description: Invalid parameters

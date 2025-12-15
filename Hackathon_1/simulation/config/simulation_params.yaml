@@ -1,0 +1,61 @@
+# Simulation Configuration Parameters for Digital Twin
+
+digital_twin_robot:
+  # Robot physical properties
+  mass: 5.0
+  wheel_separation: 0.1
+  wheel_diameter: 0.08
+
+  # Joint limits
+  joint_limits:
+    left_arm_joint:
+      lower: -1.57
+      upper: 1.57
+      effort: 10.0
+      velocity: 1.0
+    right_arm_joint:
+      lower: -1.57
+      upper: 1.57
+      effort: 10.0
+      velocity: 1.0
+    left_leg_joint:
+      lower: -0.78
+      upper: 0.78
+      effort: 20.0
+      velocity: 1.0
+    right_leg_joint:
+      lower: -0.78
+      upper: 0.78
+      effort: 20.0
+      velocity: 1.0
+
+  # Sensor parameters
+  sensors:
+    lidar:
+      update_rate: 10
+      range_min: 0.1
+      range_max: 10.0
+      samples: 360
+    camera:
+      update_rate: 30
+      width: 640
+      height: 480
+      fov: 1.047
+    imu:
+      update_rate: 100
+
+  # ROS communication
+  ros:
+    cmd_vel_topic: "cmd_vel"
+    odom_topic: "odom"
+    joint_states_topic: "joint_states"
+    scan_topic: "scan"
+    camera_topic: "camera/image_raw"
+    imu_topic: "imu/data"
+
+  # Gazebo simulation
+  gazebo:
+    physics:
+      max_step_size: 0.001
+      real_time_factor: 1.0
+      gravity: [0, 0, -9.8]

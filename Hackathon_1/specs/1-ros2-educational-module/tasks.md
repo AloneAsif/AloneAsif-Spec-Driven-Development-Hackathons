@@ -149,14 +149,14 @@ Foundational tasks for the ROS 2 educational module:
 
 **Purpose**: Improvements that affect multiple user stories
 
-- [ ] T055 [P] Update Docusaurus sidebar with all new module-1 content in sidebars.js
-- [ ] T056 [P] Create cross-references between related chapters in docs/module-1/
-- [ ] T057 Review and standardize code example formatting across all chapters
-- [ ] T058 [P] Add consistent navigation links between module chapters
-- [ ] T059 Update main book introduction to reference module-1 content
-- [ ] T060 Test Docusaurus build to ensure all content renders correctly
-- [ ] T061 [P] Add accessibility improvements to all chapter content
-- [ ] T062 Validate all code examples work as described in Ubuntu 22.04 with ROS 2 Humble
+- [X] T055 [P] Update Docusaurus sidebar with all new module-1 content in sidebars.js
+- [X] T056 [P] Create cross-references between related chapters in docs/module-1/
+- [X] T057 Review and standardize code example formatting across all chapters
+- [X] T058 [P] Add consistent navigation links between module chapters
+- [X] T059 Update main book introduction to reference module-1 content
+- [X] T060 Test Docusaurus build to ensure all content renders correctly
+- [X] T061 [P] Add accessibility improvements to all chapter content
+- [X] T062 Validate all code examples work as described in Ubuntu 22.04 with ROS 2 Humble
 
 ---
 
