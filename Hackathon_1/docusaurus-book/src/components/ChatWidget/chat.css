@@ -1,0 +1,117 @@
+.chat-container {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 9999;
+}
+
+.chat-button {
+  background: #000;
+  color: white;
+  padding: 12px 20px;
+  border-radius: 50px;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  box-shadow: 0px 0px 12px rgba(0,0,0,0.2);
+}
+
+.chat-box {
+  width: 320px;
+  height: 420px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0px 0px 12px rgba(0,0,0,0.2);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.chat-header {
+  background: #000;
+  color: white;
+  padding: 12px;
+  text-align: center;
+}
+
+.chat-body {
+  flex: 1;
+  padding: 10px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.bubble {
+  padding: 10px;
+  margin: 6px 0;
+  border-radius: 10px;
+  max-width: 75%;
+  word-wrap: break-word;
+  line-height: 1.4;
+}
+
+.user {
+  background: #e0f3ff;
+  align-self: flex-end;
+  border-bottom-right-radius: 2px;
+}
+
+.bot {
+  background: #f1f1f1;
+  align-self: flex-start;
+  border-bottom-left-radius: 2px;
+}
+
+.chat-input {
+  display: flex;
+  padding: 10px;
+  border-top: 1px solid #ddd;
+  background: white;
+}
+
+.chat-input input {
+  flex: 1;
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid #aaa;
+  outline: none;
+}
+
+.chat-input input:focus {
+  border-color: #000;
+}
+
+.chat-input button {
+  margin-left: 8px;
+  padding: 8px 12px;
+  background: #000;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.chat-input button:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+/* Scrollbar styling */
+.chat-body::-webkit-scrollbar {
+  width: 6px;
+}
+
+.chat-body::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.chat-body::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 3px;
+}
+
+.chat-body::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}

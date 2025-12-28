@@ -1,0 +1,10 @@
+fastapi
+uvicorn
+openai
+qdrant-client
+cohere
+psycopg[binary]
+ultimate-sitemap-parser
+beautifulsoup4
+python-dotenv
+requests

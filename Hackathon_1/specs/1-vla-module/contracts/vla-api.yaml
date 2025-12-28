@@ -1,0 +1,449 @@
+openapi: 3.0.0
+info:
+  title: Vision-Language-Action (VLA) API
+  description: API for the Vision-Language-Action system that unifies perception, language, and action for humanoid robots
+  version: 1.0.0
+servers:
+  - url: http://localhost:8000
+    description: Development server
+
+paths:
+  /voice/commands:
+    post:
+      summary: Submit a voice command for processing
+      description: Accepts a voice command and initiates the VLA pipeline
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                audio:
+                  type: string
+                  format: binary
+                  description: Audio file containing the voice command
+                text:
+                  type: string
+                  description: Optional text alternative to audio
+              required:
+                - audio
+      responses:
+        '201':
+          description: Voice command successfully submitted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VoiceCommand'
+        '400':
+          description: Invalid request (missing audio, poor audio quality, etc.)
+
+  /voice/commands/{commandId}:
+    get:
+      summary: Get status of a voice command
+      parameters:
+        - name: commandId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Voice command status
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VoiceCommand'
+        '404':
+          description: Command not found
+
+  /planning/generate:
+    post:
+      summary: Generate a task plan from natural language
+      description: Converts natural language command into a structured task plan
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                command:
+                  type: string
+                  description: Natural language command (e.g., "Clean the room")
+                context:
+                  type: object
+                  description: Environmental context for planning
+              required:
+                - command
+      responses:
+        '201':
+          description: Task plan successfully generated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskPlan'
+        '400':
+          description: Invalid command or planning failed
+
+  /planning/plans/{planId}:
+    get:
+      summary: Get details of a task plan
+      parameters:
+        - name: planId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Task plan details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskPlan'
+        '404':
+          description: Plan not found
+
+  /execution/execute:
+    post:
+      summary: Execute a task plan
+      description: Initiates execution of a structured task plan through ROS 2
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TaskPlan'
+      responses:
+        '202':
+          description: Task plan execution started
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ActionSequence'
+        '400':
+          description: Invalid plan or execution failed to start
+
+  /execution/status/{sequenceId}:
+    get:
+      summary: Get status of an action sequence
+      parameters:
+        - name: sequenceId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Action sequence status
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ActionSequence'
+        '404':
+          description: Action sequence not found
+
+  /vision/detect:
+    post:
+      summary: Perform object detection on image
+      description: Analyzes an image and returns detected objects
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                image:
+                  type: string
+                  format: binary
+                  description: Image file for object detection
+      responses:
+        '200':
+          description: Object detection results
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  objects:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/DetectedObject'
+                  timestamp:
+                    type: string
+                    format: date-time
+        '400':
+          description: Invalid image or detection failed
+
+  /feedback/validate:
+    post:
+      summary: Validate task completion using vision
+      description: Uses vision system to verify if a task was completed successfully
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                planId:
+                  type: string
+                  description: ID of the plan being validated
+                taskId:
+                  type: string
+                  description: ID of the specific task to validate
+                expectedOutcome:
+                  type: object
+                  description: Description of expected outcome for validation
+              required:
+                - planId
+                - taskId
+                - expectedOutcome
+      responses:
+        '200':
+          description: Validation result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FeedbackLoop'
+        '400':
+          description: Validation failed or invalid request
+
+components:
+  schemas:
+    VoiceCommand:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the command
+        text:
+          type: string
+          description: Transcribed speech text
+        timestamp:
+          type: string
+          format: date-time
+          description: When the command was received
+        confidence:
+          type: number
+          format: float
+          minimum: 0.0
+          maximum: 1.0
+          description: Confidence score of speech recognition
+        status:
+          type: string
+          enum: [pending, processing, completed, failed]
+          description: Current status of the command
+      required:
+        - id
+        - text
+        - timestamp
+        - status
+
+    TaskPlan:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the plan
+        commandId:
+          type: string
+          description: Reference to the original voice command
+        tasks:
+          type: array
+          items:
+            $ref: '#/components/schemas/Task'
+        status:
+          type: string
+          enum: [pending, executing, completed, failed, cancelled]
+          description: Current status of the plan
+        createdAt:
+          type: string
+          format: date-time
+          description: When the plan was generated
+        updatedAt:
+          type: string
+          format: date-time
+          description: When the plan was last updated
+        estimatedDuration:
+          type: integer
+          description: Estimated execution time in seconds
+      required:
+        - id
+        - commandId
+        - tasks
+        - status
+        - createdAt
+
+    Task:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the task
+        type:
+          type: string
+          enum: [navigation, manipulation, perception, other]
+          description: Type of task
+        description:
+          type: string
+          description: Human-readable description of the task
+        parameters:
+          type: object
+          description: Task-specific parameters
+        dependencies:
+          type: array
+          items:
+            type: string
+          description: List of task IDs that must complete before this task
+        timeout:
+          type: integer
+          description: Maximum time to complete the task in seconds
+      required:
+        - id
+        - type
+        - description
+        - timeout
+
+    DetectedObject:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the detected object
+        name:
+          type: string
+          description: Object classification label
+        confidence:
+          type: number
+          format: float
+          minimum: 0.0
+          maximum: 1.0
+          description: Confidence score of detection
+        position:
+          type: object
+          properties:
+            x:
+              type: number
+              format: float
+            y:
+              type: number
+              format: float
+            z:
+              type: number
+              format: float
+          description: 3D coordinates
+        boundingBox:
+          type: object
+          properties:
+            x:
+              type: integer
+            y:
+              type: integer
+            width:
+              type: integer
+            height:
+              type: integer
+          description: 2D bounding box coordinates
+        properties:
+          type: object
+          description: Additional object properties
+      required:
+        - id
+        - name
+        - confidence
+
+    ActionSequence:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the action sequence
+        planId:
+          type: string
+          description: Reference to the parent task plan
+        actions:
+          type: array
+          items:
+            $ref: '#/components/schemas/Action'
+        status:
+          type: string
+          enum: [pending, executing, completed, failed, interrupted]
+          description: Current status of the sequence
+        currentActionIndex:
+          type: integer
+          description: Index of currently executing action
+        executionLog:
+          type: array
+          items:
+            type: object
+            properties:
+              actionId:
+                type: string
+              status:
+                type: string
+                enum: [pending, executing, completed, failed]
+              timestamp:
+                type: string
+                format: date-time
+          description: Log of executed actions with timestamps
+      required:
+        - id
+        - planId
+        - actions
+        - status
+
+    Action:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the action
+        actionType:
+          type: string
+          enum: [navigation, manipulation, service_call, topic_publish]
+          description: Type of ROS 2 action
+        parameters:
+          type: object
+          description: Action-specific parameters
+        timeout:
+          type: integer
+          description: Maximum time to complete the action in seconds
+        successCriteria:
+          type: object
+          description: Conditions that define successful completion
+      required:
+        - id
+        - actionType
+        - timeout
+
+    FeedbackLoop:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the feedback loop
+        planId:
+          type: string
+          description: Reference to the task plan being monitored
+        perceptionDataId:
+          type: string
+          description: Reference to the perception data used for feedback
+        feedbackType:
+          type: string
+          enum: [validation, correction, replanning, status_update]
+          description: Type of feedback
+        result:
+          type: object
+          description: Feedback result data
+        timestamp:
+          type: string
+          format: date-time
+          description: When feedback was processed
+      required:
+        - id
+        - planId
+        - feedbackType
+        - timestamp
