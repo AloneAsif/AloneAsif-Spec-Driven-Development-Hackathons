@@ -12,6 +12,8 @@ description: "Task list template for feature implementation"
 
 **Organization**: Tasks are grouped by user story to enable independent implementation and testing of each story.
 
+**Constitution Compliance**: All tasks must adhere to the project constitution principles, ensuring spec-driven development, automated implementation, monorepo integration, user security and isolation, and technology adherence.
+
 ## Format: `[ID] [P?] [Story] Description`
 
 - **[P]**: Can run in parallel (different files, no dependencies)

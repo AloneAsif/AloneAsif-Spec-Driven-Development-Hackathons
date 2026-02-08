@@ -31,7 +31,16 @@
 
 *GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
 
-[Gates determined based on constitution file]
+### Compliance Verification
+- [ ] **Spec-driven development**: Plan originates from and adheres to structured specifications in /specs directory
+- [ ] **Automated implementation**: No manual coding; Claude Code will be used exclusively for generating and editing code based on specs
+- [ ] **Monorepo integration**: Maintains single repository for frontend, backend, and specs to enable seamless cross-cutting changes
+- [ ] **User security and isolation**: Enforces JWT-based authentication to ensure users only access their own data
+- [ ] **Technology adherence**: Strictly follows defined stack (Next.js 16+ App Router, Python FastAPI, SQLModel, Neon PostgreSQL, Better Auth)
+- [ ] **API design compliance**: Implements RESTful endpoints with JWT verification as specified
+- [ ] **Spec organization**: Follows Spec-Kit conventions with specs in /specs/overview.md, /specs/features/, /specs/api/, /specs/database/, /specs/ui/
+- [ ] **Database integrity**: Uses SQLModel for ORM with proper schema including user_id foreign keys and indexes
+- [ ] **Authentication flow**: Enables JWT plugin in Better Auth with shared BETTER_AUTH_SECRET
 
 ## Project Structure
 

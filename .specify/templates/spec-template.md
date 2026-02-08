@@ -113,3 +113,11 @@
 - **SC-002**: [Measurable metric, e.g., "System handles 1000 concurrent users without degradation"]
 - **SC-003**: [User satisfaction metric, e.g., "90% of users successfully complete primary task on first attempt"]
 - **SC-004**: [Business metric, e.g., "Reduce support tickets related to [X] by 50%"]
+
+### Constitution Compliance
+
+- **CC-001**: All implementations will originate from and adhere to structured specifications in /specs directory
+- **CC-002**: No manual coding; all code generation and modification will use Claude Code exclusively
+- **CC-003**: Implementation will maintain monorepo structure with frontend, backend, and specs in single repository
+- **CC-004**: User data access will be secured with JWT-based authentication ensuring proper isolation
+- **CC-005**: Technology stack will strictly follow Next.js 16+ (App Router), Python FastAPI, SQLModel, Neon Serverless PostgreSQL, Better Auth
